@@ -5,7 +5,7 @@
 -- Dumped from database version 11.2 (Debian 11.2-1.pgdg90+1)
 -- Dumped by pg_dump version 15.3
 
--- Started on 2024-02-16 10:21:13
+-- Started on 2024-02-16 12:56:07
 
 SET statement_timeout = 0;
 SET lock_timeout = 0;
@@ -137,7 +137,7 @@ CREATE SEQUENCE innova.prod_categorias_id_seq
 ALTER TABLE innova.prod_categorias_id_seq OWNER TO g3wsuite;
 
 --
--- TOC entry 4526 (class 0 OID 0)
+-- TOC entry 4537 (class 0 OID 0)
 -- Dependencies: 266
 -- Name: prod_categorias_id_seq; Type: SEQUENCE OWNED BY; Schema: innova; Owner: g3wsuite
 --
@@ -177,7 +177,7 @@ CREATE SEQUENCE innova.segmentos_id_seq
 ALTER TABLE innova.segmentos_id_seq OWNER TO g3wsuite;
 
 --
--- TOC entry 4527 (class 0 OID 0)
+-- TOC entry 4538 (class 0 OID 0)
 -- Dependencies: 263
 -- Name: segmentos_id_seq; Type: SEQUENCE OWNED BY; Schema: innova; Owner: g3wsuite
 --
@@ -202,12 +202,55 @@ CREATE SEQUENCE innova.ubicaciones_id_seq
 ALTER TABLE innova.ubicaciones_id_seq OWNER TO g3wsuite;
 
 --
--- TOC entry 4528 (class 0 OID 0)
+-- TOC entry 4539 (class 0 OID 0)
 -- Dependencies: 262
 -- Name: ubicaciones_id_seq; Type: SEQUENCE OWNED BY; Schema: innova; Owner: g3wsuite
 --
 
 ALTER SEQUENCE innova.ubicaciones_id_seq OWNED BY innova.cust_ubicaciones.id;
+
+
+--
+-- TOC entry 279 (class 1259 OID 60620)
+-- Name: dm_compras_mensuales_clientes_top10; Type: TABLE; Schema: innova_dm; Owner: g3wsuite
+--
+
+CREATE TABLE innova_dm.dm_compras_mensuales_clientes_top10 (
+    id integer NOT NULL,
+    customer character varying(50),
+    anio integer,
+    mes integer,
+    cantidad_productos integer,
+    cantidad_compras integer,
+    facturado real
+);
+
+
+ALTER TABLE innova_dm.dm_compras_mensuales_clientes_top10 OWNER TO g3wsuite;
+
+--
+-- TOC entry 278 (class 1259 OID 60618)
+-- Name: dm_compras_mensuales_clientes_top10_id_seq; Type: SEQUENCE; Schema: innova_dm; Owner: g3wsuite
+--
+
+CREATE SEQUENCE innova_dm.dm_compras_mensuales_clientes_top10_id_seq
+    AS integer
+    START WITH 1
+    INCREMENT BY 1
+    NO MINVALUE
+    NO MAXVALUE
+    CACHE 1;
+
+
+ALTER TABLE innova_dm.dm_compras_mensuales_clientes_top10_id_seq OWNER TO g3wsuite;
+
+--
+-- TOC entry 4540 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: dm_compras_mensuales_clientes_top10_id_seq; Type: SEQUENCE OWNED BY; Schema: innova_dm; Owner: g3wsuite
+--
+
+ALTER SEQUENCE innova_dm.dm_compras_mensuales_clientes_top10_id_seq OWNED BY innova_dm.dm_compras_mensuales_clientes_top10.id;
 
 
 --
@@ -243,7 +286,7 @@ CREATE SEQUENCE innova_dm.dm_productos_mas_vendidos_trimestre_id_seq
 ALTER TABLE innova_dm.dm_productos_mas_vendidos_trimestre_id_seq OWNER TO g3wsuite;
 
 --
--- TOC entry 4529 (class 0 OID 0)
+-- TOC entry 4541 (class 0 OID 0)
 -- Dependencies: 274
 -- Name: dm_productos_mas_vendidos_trimestre_id_seq; Type: SEQUENCE OWNED BY; Schema: innova_dm; Owner: g3wsuite
 --
@@ -282,7 +325,7 @@ CREATE SEQUENCE innova_dm."dm_top3_productos_por top10_cliente_id_seq"
 ALTER TABLE innova_dm."dm_top3_productos_por top10_cliente_id_seq" OWNER TO g3wsuite;
 
 --
--- TOC entry 4530 (class 0 OID 0)
+-- TOC entry 4542 (class 0 OID 0)
 -- Dependencies: 276
 -- Name: dm_top3_productos_por top10_cliente_id_seq; Type: SEQUENCE OWNED BY; Schema: innova_dm; Owner: g3wsuite
 --
@@ -356,7 +399,7 @@ CREATE SEQUENCE innova_dw.dim_tiempo_id_tiempo_seq
 ALTER TABLE innova_dw.dim_tiempo_id_tiempo_seq OWNER TO g3wsuite;
 
 --
--- TOC entry 4531 (class 0 OID 0)
+-- TOC entry 4543 (class 0 OID 0)
 -- Dependencies: 273
 -- Name: dim_tiempo_id_tiempo_seq; Type: SEQUENCE OWNED BY; Schema: innova_dw; Owner: g3wsuite
 --
@@ -382,7 +425,7 @@ CREATE TABLE innova_dw.fct_invoices (
 ALTER TABLE innova_dw.fct_invoices OWNER TO g3wsuite;
 
 --
--- TOC entry 4336 (class 2604 OID 58450)
+-- TOC entry 4342 (class 2604 OID 58450)
 -- Name: cust_segmentos id; Type: DEFAULT; Schema: innova; Owner: g3wsuite
 --
 
@@ -390,7 +433,7 @@ ALTER TABLE ONLY innova.cust_segmentos ALTER COLUMN id SET DEFAULT nextval('inno
 
 
 --
--- TOC entry 4335 (class 2604 OID 58439)
+-- TOC entry 4341 (class 2604 OID 58439)
 -- Name: cust_ubicaciones id; Type: DEFAULT; Schema: innova; Owner: g3wsuite
 --
 
@@ -398,7 +441,7 @@ ALTER TABLE ONLY innova.cust_ubicaciones ALTER COLUMN id SET DEFAULT nextval('in
 
 
 --
--- TOC entry 4337 (class 2604 OID 58474)
+-- TOC entry 4343 (class 2604 OID 58474)
 -- Name: prod_categorias id; Type: DEFAULT; Schema: innova; Owner: g3wsuite
 --
 
@@ -406,7 +449,15 @@ ALTER TABLE ONLY innova.prod_categorias ALTER COLUMN id SET DEFAULT nextval('inn
 
 
 --
--- TOC entry 4339 (class 2604 OID 58588)
+-- TOC entry 4347 (class 2604 OID 60623)
+-- Name: dm_compras_mensuales_clientes_top10 id; Type: DEFAULT; Schema: innova_dm; Owner: g3wsuite
+--
+
+ALTER TABLE ONLY innova_dm.dm_compras_mensuales_clientes_top10 ALTER COLUMN id SET DEFAULT nextval('innova_dm.dm_compras_mensuales_clientes_top10_id_seq'::regclass);
+
+
+--
+-- TOC entry 4345 (class 2604 OID 58588)
 -- Name: dm_productos_mas_vendidos_trimestre id; Type: DEFAULT; Schema: innova_dm; Owner: g3wsuite
 --
 
@@ -414,7 +465,7 @@ ALTER TABLE ONLY innova_dm.dm_productos_mas_vendidos_trimestre ALTER COLUMN id S
 
 
 --
--- TOC entry 4340 (class 2604 OID 58747)
+-- TOC entry 4346 (class 2604 OID 58747)
 -- Name: dm_top3_productos_por_top10_cliente id; Type: DEFAULT; Schema: innova_dm; Owner: g3wsuite
 --
 
@@ -422,7 +473,7 @@ ALTER TABLE ONLY innova_dm.dm_top3_productos_por_top10_cliente ALTER COLUMN id S
 
 
 --
--- TOC entry 4338 (class 2604 OID 58531)
+-- TOC entry 4344 (class 2604 OID 58531)
 -- Name: dim_tiempo id_tiempo; Type: DEFAULT; Schema: innova_dw; Owner: g3wsuite
 --
 
@@ -430,7 +481,7 @@ ALTER TABLE ONLY innova_dw.dim_tiempo ALTER COLUMN id_tiempo SET DEFAULT nextval
 
 
 --
--- TOC entry 4507 (class 0 OID 58447)
+-- TOC entry 4516 (class 0 OID 58447)
 -- Dependencies: 264
 -- Data for Name: cust_segmentos; Type: TABLE DATA; Schema: innova; Owner: g3wsuite
 --
@@ -443,7 +494,7 @@ COPY innova.cust_segmentos (id, nombre) FROM stdin;
 
 
 --
--- TOC entry 4504 (class 0 OID 58432)
+-- TOC entry 4513 (class 0 OID 58432)
 -- Dependencies: 261
 -- Data for Name: cust_ubicaciones; Type: TABLE DATA; Schema: innova; Owner: g3wsuite
 --
@@ -463,7 +514,7 @@ Ciudad de México	10
 
 
 --
--- TOC entry 4503 (class 0 OID 58427)
+-- TOC entry 4512 (class 0 OID 58427)
 -- Dependencies: 260
 -- Data for Name: customers; Type: TABLE DATA; Schema: innova; Owner: g3wsuite
 --
@@ -573,7 +624,7 @@ COPY innova.customers (id, nombre, ubicacion, segmento) FROM stdin;
 
 
 --
--- TOC entry 4511 (class 0 OID 58482)
+-- TOC entry 4520 (class 0 OID 58482)
 -- Dependencies: 268
 -- Data for Name: invoices; Type: TABLE DATA; Schema: innova; Owner: g3wsuite
 --
@@ -1583,7 +1634,7 @@ COPY innova.invoices (id, fecha, id_customer, id_product, cantidad) FROM stdin;
 
 
 --
--- TOC entry 4510 (class 0 OID 58471)
+-- TOC entry 4519 (class 0 OID 58471)
 -- Dependencies: 267
 -- Data for Name: prod_categorias; Type: TABLE DATA; Schema: innova; Owner: g3wsuite
 --
@@ -1597,7 +1648,7 @@ COPY innova.prod_categorias (id, nombre) FROM stdin;
 
 
 --
--- TOC entry 4508 (class 0 OID 58463)
+-- TOC entry 4517 (class 0 OID 58463)
 -- Dependencies: 265
 -- Data for Name: products; Type: TABLE DATA; Schema: innova; Owner: g3wsuite
 --
@@ -1657,7 +1708,104 @@ COPY innova.products (id, nombre, precio, categoria) FROM stdin;
 
 
 --
--- TOC entry 4518 (class 0 OID 58585)
+-- TOC entry 4531 (class 0 OID 60620)
+-- Dependencies: 279
+-- Data for Name: dm_compras_mensuales_clientes_top10; Type: TABLE DATA; Schema: innova_dm; Owner: g3wsuite
+--
+
+COPY innova_dm.dm_compras_mensuales_clientes_top10 (id, customer, anio, mes, cantidad_productos, cantidad_compras, facturado) FROM stdin;
+1	Fernando García	2023	2	11	3	3964.86523
+2	Fernando García	2023	4	18	2	4215.93896
+3	Fernando García	2023	5	9	1	3261.91992
+4	Fernando García	2023	6	9	1	2464.05469
+5	Fernando García	2023	7	3	1	141.230118
+6	Fernando García	2023	8	13	2	4123.75
+7	Fernando García	2023	9	4	1	926.829346
+8	Fernando García	2023	10	4	1	709.012451
+9	Fernando García	2023	11	7	1	650.95105
+10	Fernando García	2023	12	3	1	485.816284
+11	Fernando López	2023	1	14	2	859.710815
+12	Fernando López	2023	2	6	1	971.632568
+13	Fernando López	2023	4	5	1	1075.14307
+14	Fernando López	2023	5	9	1	110.590118
+15	Fernando López	2023	6	8	1	3635.30884
+16	Fernando López	2023	7	5	1	2089.37402
+17	Fernando López	2023	8	7	1	2711.15234
+18	Fernando López	2023	10	19	3	4496.62695
+19	Fernando López	2023	12	7	1	819.748596
+20	Fernando Martínez	2023	1	3	1	811.045044
+21	Fernando Martínez	2023	2	16	3	2441.70654
+22	Fernando Martínez	2023	3	1	1	76.9411697
+23	Fernando Martínez	2023	4	7	1	1133.57141
+24	Fernando Martínez	2023	5	1	1	448.854645
+25	Fernando Martínez	2023	7	11	2	2001.36206
+26	Fernando Martínez	2023	8	9	1	2464.05469
+27	Fernando Martínez	2023	9	25	3	4751.70264
+28	Fernando Martínez	2023	10	6	1	1642.70312
+29	Fernando Martínez	2023	11	6	1	583.081055
+30	Fernando Martínez	2023	12	15	2	6254.27637
+31	Jorge Cruz	2023	1	7	1	1237.99109
+32	Jorge Cruz	2023	2	10	1	1772.53113
+33	Jorge Cruz	2023	4	10	1	4086.3125
+34	Jorge Cruz	2023	5	12	2	5452.96338
+35	Jorge Cruz	2023	7	8	1	209.951553
+36	Jorge Cruz	2023	8	24	3	7364.49854
+37	Jorge Cruz	2023	9	10	2	1526.47351
+38	Jorge Cruz	2023	10	8	3	2373.05957
+39	Jorge Cruz	2023	12	6	1	283.094025
+40	Jorge García	2023	1	7	1	3086.05225
+41	Jorge García	2023	3	16	3	4812.46582
+42	Jorge García	2023	4	6	1	496.64978
+43	Jorge García	2023	7	13	3	5422.35645
+44	Jorge García	2023	8	27	4	5097.48242
+45	Jorge García	2023	11	5	1	1218.47632
+46	Jorge García	2023	12	10	2	2085.79468
+47	Juan González	2023	1	8	1	3269.05005
+48	Juan González	2023	3	11	2	5206.3125
+49	Juan González	2023	5	17	2	1107.62695
+50	Juan González	2023	8	9	1	262.131012
+51	Juan González	2023	10	22	3	8658.28027
+52	Juan González	2023	11	10	2	2183.979
+53	Juan González	2023	12	9	1	836.937012
+54	Manuel Cruz	2023	1	4	1	1710.46863
+55	Manuel Cruz	2023	2	11	2	2817.88354
+56	Manuel Cruz	2023	3	9	2	2917.20679
+57	Manuel Cruz	2023	6	25	3	6548.03418
+58	Manuel Cruz	2023	7	20	3	4683.19189
+59	Manuel Cruz	2023	11	3	1	366.644043
+60	Manuel Cruz	2023	12	7	1	579.424744
+61	Manuel Hernández	2023	1	3	1	845.022949
+62	Manuel Hernández	2023	2	14	2	4153.23926
+63	Manuel Hernández	2023	3	9	1	1053.96252
+64	Manuel Hernández	2023	6	10	1	327.600128
+65	Manuel Hernández	2023	8	10	2	1814.65259
+66	Manuel Hernández	2023	9	15	2	393.65918
+67	Manuel Hernández	2023	10	14	2	2825.67334
+68	Manuel Hernández	2023	11	6	2	1959.86426
+69	Manuel Hernández	2023	12	10	2	3280.59619
+70	Manuel Rodríguez	2023	1	6	1	1290.37439
+71	Manuel Rodríguez	2023	2	8	1	2928.2395
+72	Manuel Rodríguez	2023	3	26	3	4706.15723
+73	Manuel Rodríguez	2023	6	25	3	6593.11426
+74	Manuel Rodríguez	2023	7	6	1	2832.95337
+75	Manuel Rodríguez	2023	8	3	1	87.3769989
+76	Manuel Rodríguez	2023	9	10	1	1222.14685
+77	Manuel Rodríguez	2023	12	6	2	525.756958
+78	Miguel Rodríguez	2023	2	10	1	312.243134
+79	Miguel Rodríguez	2023	3	1	1	273.783844
+80	Miguel Rodríguez	2023	5	2	1	350.563995
+81	Miguel Rodríguez	2023	6	15	2	2383.02319
+82	Miguel Rodríguez	2023	7	9	1	262.131012
+83	Miguel Rodríguez	2023	8	10	1	471.823395
+84	Miguel Rodríguez	2023	9	18	2	1070.10413
+85	Miguel Rodríguez	2023	10	1	1	26.2439442
+86	Miguel Rodríguez	2023	11	9	1	262.131012
+87	Miguel Rodríguez	2023	12	6	1	1642.70312
+\.
+
+
+--
+-- TOC entry 4527 (class 0 OID 58585)
 -- Dependencies: 275
 -- Data for Name: dm_productos_mas_vendidos_trimestre; Type: TABLE DATA; Schema: innova_dm; Owner: g3wsuite
 --
@@ -1671,7 +1819,7 @@ COPY innova_dm.dm_productos_mas_vendidos_trimestre (id, producto, anio, trimestr
 
 
 --
--- TOC entry 4520 (class 0 OID 58744)
+-- TOC entry 4529 (class 0 OID 58744)
 -- Dependencies: 277
 -- Data for Name: dm_top3_productos_por_top10_cliente; Type: TABLE DATA; Schema: innova_dm; Owner: g3wsuite
 --
@@ -1691,7 +1839,7 @@ COPY innova_dm.dm_top3_productos_por_top10_cliente (id, top3productos, customer)
 
 
 --
--- TOC entry 4512 (class 0 OID 58507)
+-- TOC entry 4521 (class 0 OID 58507)
 -- Dependencies: 269
 -- Data for Name: dim_customers; Type: TABLE DATA; Schema: innova_dw; Owner: g3wsuite
 --
@@ -1801,7 +1949,7 @@ COPY innova_dw.dim_customers (id_customer, nombre, ubicacion, segmento) FROM std
 
 
 --
--- TOC entry 4513 (class 0 OID 58512)
+-- TOC entry 4522 (class 0 OID 58512)
 -- Dependencies: 270
 -- Data for Name: dim_products; Type: TABLE DATA; Schema: innova_dw; Owner: g3wsuite
 --
@@ -1861,7 +2009,7 @@ COPY innova_dw.dim_products (id_product, nombre, precio, categoria) FROM stdin;
 
 
 --
--- TOC entry 4515 (class 0 OID 58522)
+-- TOC entry 4524 (class 0 OID 58522)
 -- Dependencies: 272
 -- Data for Name: dim_tiempo; Type: TABLE DATA; Schema: innova_dw; Owner: g3wsuite
 --
@@ -2217,7 +2365,7 @@ COPY innova_dw.dim_tiempo (fecha_dia, dia, mes, anio, trimestre, cuatrimestre, d
 
 
 --
--- TOC entry 4514 (class 0 OID 58517)
+-- TOC entry 4523 (class 0 OID 58517)
 -- Dependencies: 271
 -- Data for Name: fct_invoices; Type: TABLE DATA; Schema: innova_dw; Owner: g3wsuite
 --
@@ -3227,7 +3375,7 @@ COPY innova_dw.fct_invoices (id_invoice, fecha, customer, product, cantidad, tot
 
 
 --
--- TOC entry 4532 (class 0 OID 0)
+-- TOC entry 4544 (class 0 OID 0)
 -- Dependencies: 266
 -- Name: prod_categorias_id_seq; Type: SEQUENCE SET; Schema: innova; Owner: g3wsuite
 --
@@ -3236,7 +3384,7 @@ SELECT pg_catalog.setval('innova.prod_categorias_id_seq', 4, true);
 
 
 --
--- TOC entry 4533 (class 0 OID 0)
+-- TOC entry 4545 (class 0 OID 0)
 -- Dependencies: 263
 -- Name: segmentos_id_seq; Type: SEQUENCE SET; Schema: innova; Owner: g3wsuite
 --
@@ -3245,7 +3393,7 @@ SELECT pg_catalog.setval('innova.segmentos_id_seq', 3, true);
 
 
 --
--- TOC entry 4534 (class 0 OID 0)
+-- TOC entry 4546 (class 0 OID 0)
 -- Dependencies: 262
 -- Name: ubicaciones_id_seq; Type: SEQUENCE SET; Schema: innova; Owner: g3wsuite
 --
@@ -3254,7 +3402,16 @@ SELECT pg_catalog.setval('innova.ubicaciones_id_seq', 10, true);
 
 
 --
--- TOC entry 4535 (class 0 OID 0)
+-- TOC entry 4547 (class 0 OID 0)
+-- Dependencies: 278
+-- Name: dm_compras_mensuales_clientes_top10_id_seq; Type: SEQUENCE SET; Schema: innova_dm; Owner: g3wsuite
+--
+
+SELECT pg_catalog.setval('innova_dm.dm_compras_mensuales_clientes_top10_id_seq', 87, true);
+
+
+--
+-- TOC entry 4548 (class 0 OID 0)
 -- Dependencies: 274
 -- Name: dm_productos_mas_vendidos_trimestre_id_seq; Type: SEQUENCE SET; Schema: innova_dm; Owner: g3wsuite
 --
@@ -3263,7 +3420,7 @@ SELECT pg_catalog.setval('innova_dm.dm_productos_mas_vendidos_trimestre_id_seq',
 
 
 --
--- TOC entry 4536 (class 0 OID 0)
+-- TOC entry 4549 (class 0 OID 0)
 -- Dependencies: 276
 -- Name: dm_top3_productos_por top10_cliente_id_seq; Type: SEQUENCE SET; Schema: innova_dm; Owner: g3wsuite
 --
@@ -3272,7 +3429,7 @@ SELECT pg_catalog.setval('innova_dm."dm_top3_productos_por top10_cliente_id_seq"
 
 
 --
--- TOC entry 4537 (class 0 OID 0)
+-- TOC entry 4550 (class 0 OID 0)
 -- Dependencies: 273
 -- Name: dim_tiempo_id_tiempo_seq; Type: SEQUENCE SET; Schema: innova_dw; Owner: g3wsuite
 --
@@ -3281,7 +3438,7 @@ SELECT pg_catalog.setval('innova_dw.dim_tiempo_id_tiempo_seq', 346, true);
 
 
 --
--- TOC entry 4342 (class 2606 OID 58431)
+-- TOC entry 4349 (class 2606 OID 58431)
 -- Name: customers customers_pk; Type: CONSTRAINT; Schema: innova; Owner: g3wsuite
 --
 
@@ -3290,7 +3447,7 @@ ALTER TABLE ONLY innova.customers
 
 
 --
--- TOC entry 4352 (class 2606 OID 58486)
+-- TOC entry 4359 (class 2606 OID 58486)
 -- Name: invoices invoices_pk; Type: CONSTRAINT; Schema: innova; Owner: g3wsuite
 --
 
@@ -3299,7 +3456,7 @@ ALTER TABLE ONLY innova.invoices
 
 
 --
--- TOC entry 4350 (class 2606 OID 58476)
+-- TOC entry 4357 (class 2606 OID 58476)
 -- Name: prod_categorias prod_categorias_pk; Type: CONSTRAINT; Schema: innova; Owner: g3wsuite
 --
 
@@ -3308,7 +3465,7 @@ ALTER TABLE ONLY innova.prod_categorias
 
 
 --
--- TOC entry 4348 (class 2606 OID 58493)
+-- TOC entry 4355 (class 2606 OID 58493)
 -- Name: products products_pk; Type: CONSTRAINT; Schema: innova; Owner: g3wsuite
 --
 
@@ -3317,7 +3474,7 @@ ALTER TABLE ONLY innova.products
 
 
 --
--- TOC entry 4346 (class 2606 OID 58452)
+-- TOC entry 4353 (class 2606 OID 58452)
 -- Name: cust_segmentos segmentos_pk; Type: CONSTRAINT; Schema: innova; Owner: g3wsuite
 --
 
@@ -3326,7 +3483,7 @@ ALTER TABLE ONLY innova.cust_segmentos
 
 
 --
--- TOC entry 4344 (class 2606 OID 58444)
+-- TOC entry 4351 (class 2606 OID 58444)
 -- Name: cust_ubicaciones ubicaciones_pk; Type: CONSTRAINT; Schema: innova; Owner: g3wsuite
 --
 
@@ -3335,7 +3492,16 @@ ALTER TABLE ONLY innova.cust_ubicaciones
 
 
 --
--- TOC entry 4364 (class 2606 OID 58752)
+-- TOC entry 4373 (class 2606 OID 60625)
+-- Name: dm_compras_mensuales_clientes_top10 dm_compras_mensuales_clientes_top10_pk; Type: CONSTRAINT; Schema: innova_dm; Owner: g3wsuite
+--
+
+ALTER TABLE ONLY innova_dm.dm_compras_mensuales_clientes_top10
+    ADD CONSTRAINT dm_compras_mensuales_clientes_top10_pk PRIMARY KEY (id);
+
+
+--
+-- TOC entry 4371 (class 2606 OID 58752)
 -- Name: dm_top3_productos_por_top10_cliente dm_top3_productos_por_top10_cliente_pk; Type: CONSTRAINT; Schema: innova_dm; Owner: g3wsuite
 --
 
@@ -3344,7 +3510,7 @@ ALTER TABLE ONLY innova_dm.dm_top3_productos_por_top10_cliente
 
 
 --
--- TOC entry 4354 (class 2606 OID 58511)
+-- TOC entry 4361 (class 2606 OID 58511)
 -- Name: dim_customers dim_customers_pk; Type: CONSTRAINT; Schema: innova_dw; Owner: g3wsuite
 --
 
@@ -3353,7 +3519,7 @@ ALTER TABLE ONLY innova_dw.dim_customers
 
 
 --
--- TOC entry 4356 (class 2606 OID 58516)
+-- TOC entry 4363 (class 2606 OID 58516)
 -- Name: dim_products dim_products_pk; Type: CONSTRAINT; Schema: innova_dw; Owner: g3wsuite
 --
 
@@ -3362,7 +3528,7 @@ ALTER TABLE ONLY innova_dw.dim_products
 
 
 --
--- TOC entry 4360 (class 2606 OID 58537)
+-- TOC entry 4367 (class 2606 OID 58537)
 -- Name: dim_tiempo dim_tiempo_pk; Type: CONSTRAINT; Schema: innova_dw; Owner: g3wsuite
 --
 
@@ -3371,7 +3537,7 @@ ALTER TABLE ONLY innova_dw.dim_tiempo
 
 
 --
--- TOC entry 4362 (class 2606 OID 58528)
+-- TOC entry 4369 (class 2606 OID 58528)
 -- Name: dim_tiempo dim_tiempo_unique; Type: CONSTRAINT; Schema: innova_dw; Owner: g3wsuite
 --
 
@@ -3380,7 +3546,7 @@ ALTER TABLE ONLY innova_dw.dim_tiempo
 
 
 --
--- TOC entry 4358 (class 2606 OID 58521)
+-- TOC entry 4365 (class 2606 OID 58521)
 -- Name: fct_invoices fct_invoices_pk; Type: CONSTRAINT; Schema: innova_dw; Owner: g3wsuite
 --
 
@@ -3389,7 +3555,7 @@ ALTER TABLE ONLY innova_dw.fct_invoices
 
 
 --
--- TOC entry 4365 (class 2606 OID 58458)
+-- TOC entry 4374 (class 2606 OID 58458)
 -- Name: customers customers_segmentos_fk; Type: FK CONSTRAINT; Schema: innova; Owner: g3wsuite
 --
 
@@ -3398,7 +3564,7 @@ ALTER TABLE ONLY innova.customers
 
 
 --
--- TOC entry 4366 (class 2606 OID 58453)
+-- TOC entry 4375 (class 2606 OID 58453)
 -- Name: customers customers_ubicaciones_fk; Type: FK CONSTRAINT; Schema: innova; Owner: g3wsuite
 --
 
@@ -3407,7 +3573,7 @@ ALTER TABLE ONLY innova.customers
 
 
 --
--- TOC entry 4368 (class 2606 OID 58487)
+-- TOC entry 4377 (class 2606 OID 58487)
 -- Name: invoices invoices_customers_fk; Type: FK CONSTRAINT; Schema: innova; Owner: g3wsuite
 --
 
@@ -3416,7 +3582,7 @@ ALTER TABLE ONLY innova.invoices
 
 
 --
--- TOC entry 4369 (class 2606 OID 58494)
+-- TOC entry 4378 (class 2606 OID 58494)
 -- Name: invoices invoices_products_fk; Type: FK CONSTRAINT; Schema: innova; Owner: g3wsuite
 --
 
@@ -3425,7 +3591,7 @@ ALTER TABLE ONLY innova.invoices
 
 
 --
--- TOC entry 4367 (class 2606 OID 58477)
+-- TOC entry 4376 (class 2606 OID 58477)
 -- Name: products products_prod_categorias_fk; Type: FK CONSTRAINT; Schema: innova; Owner: g3wsuite
 --
 
@@ -3434,7 +3600,7 @@ ALTER TABLE ONLY innova.products
 
 
 --
--- TOC entry 4370 (class 2606 OID 58567)
+-- TOC entry 4379 (class 2606 OID 58567)
 -- Name: fct_invoices fct_invoices_dim_customers_fk; Type: FK CONSTRAINT; Schema: innova_dw; Owner: g3wsuite
 --
 
@@ -3443,7 +3609,7 @@ ALTER TABLE ONLY innova_dw.fct_invoices
 
 
 --
--- TOC entry 4371 (class 2606 OID 58572)
+-- TOC entry 4380 (class 2606 OID 58572)
 -- Name: fct_invoices fct_invoices_dim_products_fk; Type: FK CONSTRAINT; Schema: innova_dw; Owner: g3wsuite
 --
 
@@ -3452,7 +3618,7 @@ ALTER TABLE ONLY innova_dw.fct_invoices
 
 
 --
--- TOC entry 4372 (class 2606 OID 58577)
+-- TOC entry 4381 (class 2606 OID 58577)
 -- Name: fct_invoices fct_invoices_dim_tiempo_fk; Type: FK CONSTRAINT; Schema: innova_dw; Owner: g3wsuite
 --
 
@@ -3460,7 +3626,7 @@ ALTER TABLE ONLY innova_dw.fct_invoices
     ADD CONSTRAINT fct_invoices_dim_tiempo_fk FOREIGN KEY (fecha) REFERENCES innova_dw.dim_tiempo(id_tiempo);
 
 
--- Completed on 2024-02-16 10:21:14
+-- Completed on 2024-02-16 12:56:07
 
 --
 -- PostgreSQL database dump complete
