@@ -31,7 +31,7 @@ begin
 		
 		insert into innova_dw.dim_tiempo (fecha_dia,dia,mes,anio,trimestre,dia_semana,cuatrimestre) values(cast(fecha as text),dia,mes,anio,trimestre,dia_semana,cuatrimestre);
 	
-		raise notice '%, %, %, %, %, %, %',cast(fecha as text),dia,mes,anio,trimestre,dia_semana,cuatrimestre;
+		-- raise notice '%, %, %, %, %, %, %',cast(fecha as text),dia,mes,anio,trimestre,dia_semana,cuatrimestre;
 		
 		
 	
