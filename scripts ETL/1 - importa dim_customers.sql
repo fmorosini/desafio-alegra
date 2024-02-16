@@ -4,7 +4,7 @@ with customers_dw as
 )
 
 insert into innova_dw.dim_customers(id_customer,nombre,ubicacion,segmento)
-select c.id,c.nombre,cs.nombre,cu.nombre 
+select c.id,c.nombre,cu.nombre,cs.nombre 
 from innova.customers c
 inner join innova.cust_segmentos cs on c.segmento = cs.id 
 inner join innova.cust_ubicaciones cu on c.ubicacion = cu.id
