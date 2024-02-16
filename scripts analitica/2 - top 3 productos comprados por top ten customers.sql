@@ -1,3 +1,5 @@
+truncate table innova_dm.dm_top3_productos_por_top10_cliente ;
+
 drop table if exists top_ten_customers;
 drop table if exists top_products_customer;
 
@@ -17,13 +19,27 @@ create temporary table top_products_customer as
 	group by fi.product,fi.customer
 	order by fi.customer,1 desc;
 
-select ttc.total_vendido,dp.nombre as producto,dc.nombre  as customer 
-from top_products_customer ttc
-inner join innova_dw.dim_products dp on dp.id_product = ttc.product
-inner join dim_customers dc on ttc.customer = dc.id_customer 
-where ttc.customer in 
+with top_3_products_customer as
 (
-	select t.customer
-	from top_ten_customers t
+	select array
+		( 
+			select dp.nombre 
+			from top_products_customer t
+			inner join innova_dw.dim_products dp on dp.id_product = t.product
+			where t.customer = ttc.customer
+			order by t.total_vendido
+			limit 3
+		) as top3
+		,ttc.customer
+	from top_products_customer ttc
+	where ttc.customer in 
+	(	
+		select t.customer
+		from top_ten_customers t
+	)
+		
 )
-order by ttc.customer;
+insert into innova_dm.dm_top3_productos_por_top10_cliente (top3productos,customer)
+select distinct t3c.top3,dc.nombre as customer
+from top_3_products_customer t3c
+inner join innova_dw.dim_customers dc on dc.id_customer = t3c.customer;
