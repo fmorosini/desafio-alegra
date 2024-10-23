@@ -22,4 +22,4 @@ Los modelos, tanto el normalizado para OLTP como el Star para DW (modelo de hech
     innova DW: https://dbdiagram.io/d/innova-DW-65ce2b78ac844320ae3ac74d
 
 
-    
+print("hola gil")
